@@ -3,24 +3,23 @@ import { NetworkGuard } from "./components/NetworkGuard";
 import { SignInPanel } from "./components/SignInPanel";
 import { IdentityCard } from "./components/IdentityCard";
 import { BalancePanel } from "./components/BalancePanel";
-import { useAddress, useEnsName } from "@thirdweb-dev/react";
+import { useAccount } from "wagmi";
+import { useEnsName } from "wagmi";
 
 export default function App() {
-  const address = useAddress();
+  const { address, isConnected } = useAccount();
   const { data: ensName } = useEnsName({ address });
 
-  // Grab the first 3-word part of the Basename (e.g., "happy.sunny.beach")
+  // Extract first 3 words from Basename (e.g., "happy.sunny.beach")
   const threeWordPin = ensName
     ? ensName.split('.')[0]?.replace(/-/g, ' ') || "your.pin.here"
     : "your.pin.here";
-
-  const isConnected = !!address;
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
       <div className="max-w-md mx-auto px-5 py-8 flex flex-col gap-6">
 
-        {/* Header – fixed: "B" for Base, not Bitcoin */}
+        {/* Header – "B" for Base */}
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-[#0052FF] flex items-center justify-center text-white font-bold text-sm">
@@ -35,7 +34,7 @@ export default function App() {
           )}
         </header>
 
-        {/* Hero – friendly copy */}
+        {/* Hero */}
         <section className="text-center space-y-3 py-4">
           <h1 className="text-4xl font-bold tracking-tight leading-tight">
             {isConnected ? (
@@ -50,7 +49,7 @@ export default function App() {
           </h1>
           <p className="text-zinc-400 text-sm max-w-xs mx-auto">
             {isConnected
-              ? `You’re in as “${threeWordPin}” – your universal ID for real‑world assets.`
+              ? `You're in as "${threeWordPin}" – your universal ID for real‑world assets.`
               : "Connect your wallet in seconds – no blockchain jargon, just three words."}
           </p>
           <div className="pt-2">
