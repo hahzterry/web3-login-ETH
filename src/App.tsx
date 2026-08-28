@@ -1,40 +1,96 @@
-//Mariano Montini ('bosque', 'bosquestudio')
+// Mariano Montini ('bosque', 'bosquestudio')
 import { ConnectWallet } from "./components/ConnectWallet";
 import { NetworkGuard } from "./components/NetworkGuard";
 import { SignInPanel } from "./components/SignInPanel";
 import { IdentityCard } from "./components/IdentityCard";
 import { BalancePanel } from "./components/BalancePanel";
+import { useAddress, useEnsName } from "@thirdweb-dev/react";
 
-// App shell - one pedagogical screen: connect, identity, balances, SIWE.
 export default function App() {
+  const address = useAddress();
+  const { data: ensName } = useEnsName({ address });
+
+  // Extract the first 3 words from Basename (e.g., "happy.sunny.beach")
+  const threeWordPin = ensName
+    ? ensName.split('.')[0]?.replace(/-/g, ' ') || "your.pin.here"
+    : "your.pin.here";
+
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      <div className="mx-auto flex max-w-xl flex-col gap-8 px-6 py-12">
-        <header className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-400">
-            web3-login-ETH
-          </p>
-          <h1 className="text-3xl font-semibold tracking-tight">
-            Base wallet login template
+    <div className="min-h-screen bg-black text-white font-sans">
+      <div className="max-w-md mx-auto px-5 py-8 flex flex-col gap-6">
+
+        {/* --- Header with brand & user greeting --- */}
+        <header className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-[#0052FF] flex items-center justify-center text-white font-bold text-sm">
+              ₿
+            </div>
+            <span className="text-lg font-semibold tracking-tight">Base</span>
+          </div>
+          {address && (
+            <span className="text-sm text-zinc-400 bg-zinc-900 px-3 py-1 rounded-full">
+              👋 {threeWordPin}
+            </span>
+          )}
+        </header>
+
+        {/* --- Main hero --- */}
+        <section className="text-center space-y-3 py-4">
+          <h1 className="text-4xl font-bold tracking-tight leading-tight">
+            {address ? (
+              <>
+                Your <span className="text-[#0052FF]">3‑word</span> key
+              </>
+            ) : (
+              <>
+                Money, <span className="text-[#0052FF]">simplified.</span>
+              </>
+            )}
           </h1>
-          <p className="text-sm leading-relaxed text-zinc-400">
-            Pedagogical demo: connect on Base, resolve Basename/ENS + avatar,
-            read ETH (and optional ERC-20), then SIWE sign-in for an HTTP
-            session. Fork this for other dapps.
+          <p className="text-zinc-400 text-sm max-w-xs mx-auto">
+            {address
+              ? `You’re in as “${threeWordPin}” – this is your universal ID for real‑world assets.`
+              : "Connect your wallet in seconds – no blockchain jargon, just three words."}
           </p>
           <div className="pt-2">
             <ConnectWallet />
           </div>
-        </header>
+        </section>
 
+        {/* --- Network guard (auto‑switches to Base) --- */}
         <NetworkGuard />
-        <IdentityCard />
-        <BalancePanel />
-        <SignInPanel />
 
-        <footer className="border-t border-zinc-800 pt-6 text-xs text-zinc-600">
-          Connect proves a provider link. SIWE proves key ownership to your
-          server. Auth stub is local Vite middleware — not production hardening.
+        {/* --- Identity card – shows 3‑word PIN big and bold --- */}
+        {address && (
+          <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 border border-zinc-800">
+            <IdentityCard />
+            <div className="mt-3 text-center">
+              <p className="text-2xl font-mono font-bold text-[#0052FF] tracking-wide">
+                {threeWordPin}
+              </p>
+              <p className="text-xs text-zinc-500 mt-1">Your permanent access key</p>
+            </div>
+          </div>
+        )}
+
+        {/* --- Balance panel – shows RWA holdings as "Your assets" --- */}
+        {address && (
+          <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 border border-zinc-800">
+            <BalancePanel />
+          </div>
+        )}
+
+        {/* --- Sign‑in panel – renamed to "Secure your session" --- */}
+        {address && (
+          <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 border border-zinc-800">
+            <SignInPanel />
+          </div>
+        )}
+
+        {/* --- Footer with simple, friendly message --- */}
+        <footer className="text-center text-xs text-zinc-600 border-t border-zinc-800 pt-6 mt-2">
+          <p>🔐 Your keys, your assets. No hidden fees.</p>
+          <p className="mt-1">Built on Base – the home of real‑world assets.</p>
         </footer>
       </div>
     </div>
