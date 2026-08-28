@@ -2,22 +2,16 @@
 
 :root {
   color-scheme: dark;
-  font-family: "Inter", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: #000000;
-  background-image: radial-gradient(circle at 10% 20%, rgba(0, 82, 255, 0.05) 0%, transparent 50%);
+  background: #000000; /* solid black – no gradient to fail */
 }
 
-/* Smooth interactions */
-button {
-  transition: all 0.2s ease;
-}
-
-/* Custom scrollbar (Gen‑Z loves subtle details) */
+/* subtle scrollbar (just for fun) */
 ::-webkit-scrollbar {
   width: 4px;
 }
