@@ -10,16 +10,18 @@ export default function App() {
   const address = useAddress();
   const { data: ensName } = useEnsName({ address });
 
-  // Extract the first 3 words from Basename (e.g., "happy.sunny.beach")
+  // Extract first 3 words from Basename (e.g., "happy.sunny.beach")
   const threeWordPin = ensName
     ? ensName.split('.')[0]?.replace(/-/g, ' ') || "your.pin.here"
     : "your.pin.here";
+
+  const isConnected = !!address;
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
       <div className="max-w-md mx-auto px-5 py-8 flex flex-col gap-6">
 
-        {/* --- Header with brand & user greeting --- */}
+        {/* Header */}
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-[#0052FF] flex items-center justify-center text-white font-bold text-sm">
@@ -27,17 +29,17 @@ export default function App() {
             </div>
             <span className="text-lg font-semibold tracking-tight">Base</span>
           </div>
-          {address && (
+          {isConnected && (
             <span className="text-sm text-zinc-400 bg-zinc-900 px-3 py-1 rounded-full">
               👋 {threeWordPin}
             </span>
           )}
         </header>
 
-        {/* --- Main hero --- */}
+        {/* Hero */}
         <section className="text-center space-y-3 py-4">
           <h1 className="text-4xl font-bold tracking-tight leading-tight">
-            {address ? (
+            {isConnected ? (
               <>
                 Your <span className="text-[#0052FF]">3‑word</span> key
               </>
@@ -48,8 +50,8 @@ export default function App() {
             )}
           </h1>
           <p className="text-zinc-400 text-sm max-w-xs mx-auto">
-            {address
-              ? `You’re in as “${threeWordPin}” – this is your universal ID for real‑world assets.`
+            {isConnected
+              ? `You’re in as “${threeWordPin}” – your universal ID for real‑world assets.`
               : "Connect your wallet in seconds – no blockchain jargon, just three words."}
           </p>
           <div className="pt-2">
@@ -57,37 +59,33 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- Network guard (auto‑switches to Base) --- */}
+        {/* Network guard */}
         <NetworkGuard />
 
-        {/* --- Identity card – shows 3‑word PIN big and bold --- */}
-        {address && (
-          <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 border border-zinc-800">
-            <IdentityCard />
-            <div className="mt-3 text-center">
-              <p className="text-2xl font-mono font-bold text-[#0052FF] tracking-wide">
-                {threeWordPin}
-              </p>
-              <p className="text-xs text-zinc-500 mt-1">Your permanent access key</p>
+        {/* Logged-in panels */}
+        {isConnected && (
+          <>
+            <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 border border-zinc-800">
+              <IdentityCard />
+              <div className="mt-3 text-center">
+                <p className="text-2xl font-mono font-bold text-[#0052FF] tracking-wide">
+                  {threeWordPin}
+                </p>
+                <p className="text-xs text-zinc-500 mt-1">Your permanent access key</p>
+              </div>
             </div>
-          </div>
+
+            <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 border border-zinc-800">
+              <BalancePanel />
+            </div>
+
+            <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 border border-zinc-800">
+              <SignInPanel />
+            </div>
+          </>
         )}
 
-        {/* --- Balance panel – shows RWA holdings as "Your assets" --- */}
-        {address && (
-          <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 border border-zinc-800">
-            <BalancePanel />
-          </div>
-        )}
-
-        {/* --- Sign‑in panel – renamed to "Secure your session" --- */}
-        {address && (
-          <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 border border-zinc-800">
-            <SignInPanel />
-          </div>
-        )}
-
-        {/* --- Footer with simple, friendly message --- */}
+        {/* Footer */}
         <footer className="text-center text-xs text-zinc-600 border-t border-zinc-800 pt-6 mt-2">
           <p>🔐 Your keys, your assets. No hidden fees.</p>
           <p className="mt-1">Built on Base – the home of real‑world assets.</p>
