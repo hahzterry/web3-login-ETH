@@ -1,4 +1,3 @@
-// Mariano Montini ('bosque', 'bosquestudio')
 import { ConnectWallet } from "./components/ConnectWallet";
 import { NetworkGuard } from "./components/NetworkGuard";
 import { SignInPanel } from "./components/SignInPanel";
@@ -10,7 +9,7 @@ export default function App() {
   const address = useAddress();
   const { data: ensName } = useEnsName({ address });
 
-  // Extract first 3 words from Basename (e.g., "happy.sunny.beach")
+  // Grab the first 3-word part of the Basename (e.g., "happy.sunny.beach")
   const threeWordPin = ensName
     ? ensName.split('.')[0]?.replace(/-/g, ' ') || "your.pin.here"
     : "your.pin.here";
@@ -21,11 +20,11 @@ export default function App() {
     <div className="min-h-screen bg-black text-white font-sans">
       <div className="max-w-md mx-auto px-5 py-8 flex flex-col gap-6">
 
-        {/* Header */}
+        {/* Header – fixed: "B" for Base, not Bitcoin */}
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-[#0052FF] flex items-center justify-center text-white font-bold text-sm">
-              ₿
+              B
             </div>
             <span className="text-lg font-semibold tracking-tight">Base</span>
           </div>
@@ -36,7 +35,7 @@ export default function App() {
           )}
         </header>
 
-        {/* Hero */}
+        {/* Hero – friendly copy */}
         <section className="text-center space-y-3 py-4">
           <h1 className="text-4xl font-bold tracking-tight leading-tight">
             {isConnected ? (
@@ -59,10 +58,8 @@ export default function App() {
           </div>
         </section>
 
-        {/* Network guard */}
         <NetworkGuard />
 
-        {/* Logged-in panels */}
         {isConnected && (
           <>
             <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 border border-zinc-800">
@@ -85,7 +82,6 @@ export default function App() {
           </>
         )}
 
-        {/* Footer */}
         <footer className="text-center text-xs text-zinc-600 border-t border-zinc-800 pt-6 mt-2">
           <p>🔐 Your keys, your assets. No hidden fees.</p>
           <p className="mt-1">Built on Base – the home of real‑world assets.</p>
