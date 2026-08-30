@@ -16,17 +16,17 @@ export default function App() {
           <div className="mx-auto flex max-w-2xl items-center justify-between px-6 py-4">
             <Link to="/" className="flex items-center gap-2">
               <span className="text-xl">🏦</span>
-              <span className="font-bold text-lg">3 Word Pin Wallet</span>
+              <span className="font-bold text-lg"></span>
             </Link>
             <div className="flex items-center gap-4">
               <Link to="/buy" className="text-sm text-zinc-300 hover:text-white transition-colors">
-                🛒 Buy Pins
+                🛒
               </Link>
               <Link to="/sell" className="text-sm text-zinc-300 hover:text-white transition-colors">
-                💰 Sell Pins
+                💰
               </Link>
               <Link to="/profile" className="text-sm text-zinc-300 hover:text-white transition-colors">
-                👤 My Pins
+                👤
               </Link>
               <ConnectWallet />
             </div>
