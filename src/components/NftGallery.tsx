@@ -1,8 +1,8 @@
 // Mariano Montini ('bosque', 'bosquestudio')
 import { useActiveAccount, useReadContract } from "thirdweb/react";
-import { getContract } from "thirdweb";
+import { getContract, type NFT } from "thirdweb";
 import { getOwnedNFTs } from "thirdweb/extensions/erc721";
-import { client, baseMainnet } from "../lib/chains"; // import client too
+import { client, baseMainnet } from "../lib/chains";
 
 // Replace with your actual 3 Word Pin NFT contract address
 const NFT_CONTRACT_ADDRESS = "0xYourNftContractAddress";
@@ -18,8 +18,14 @@ export function NftGallery() {
     chain: baseMainnet,
   });
 
+  // Use the query option directly – no conditional undefined
   const { data: ownedNFTs, isLoading, error } = useReadContract(
-    account ? getOwnedNFTs({ contract, owner: account.address }) : undefined,
+    account
+      ? getOwnedNFTs({
+          contract,
+          owner: account.address,
+        })
+      : null, // Pass null instead of undefined when no account
   );
 
   // Not connected
@@ -67,8 +73,11 @@ export function NftGallery() {
     );
   }
 
+  // Cast to NFT[] explicitly
+  const nfts = ownedNFTs as NFT[];
+
   // Check for verified NFTs
-  const hasVerifiedNFT = ownedNFTs.some((nft) =>
+  const hasVerifiedNFT = nfts.some((nft) =>
     VERIFIED_TOKEN_IDS.includes(Number(nft.id)),
   );
 
@@ -87,7 +96,7 @@ export function NftGallery() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {ownedNFTs.map((nft) => (
+        {nfts.map((nft) => (
           <div
             key={nft.id.toString()}
             className="border border-zinc-700 rounded-lg overflow-hidden bg-zinc-800/50"
