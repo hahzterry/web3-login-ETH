@@ -4,6 +4,7 @@ import { NetworkGuard } from "./components/NetworkGuard";
 import { SignInPanel } from "./components/SignInPanel";
 import { IdentityCard } from "./components/IdentityCard";
 import { BalancePanel } from "./components/BalancePanel";
+import { NftGallery } from "./components/NftGallery";
 
 // App shell – simple landing page for 3 Word Pin Wallet
 export default function App() {
@@ -18,8 +19,7 @@ export default function App() {
             Your friendly wallet for the 3 Word Pin world
           </h1>
           <p className="text-sm leading-relaxed text-zinc-400">
-            Connect, see your identity, check your points, and earn rewards –
-            no technical knowledge needed.
+            Connect, see your identity, and verify the 3 Word Pins you own.
           </p>
           <div className="pt-2">
             <ConnectWallet />
@@ -29,6 +29,10 @@ export default function App() {
         <NetworkGuard />
         <IdentityCard />
         <BalancePanel />
+
+        {/* NFT Verification & Gallery */}
+        <NftGallery />
+
         <SignInPanel />
 
         {/* Real-World Uses Section */}
