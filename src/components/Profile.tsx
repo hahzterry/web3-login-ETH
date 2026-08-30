@@ -8,8 +8,8 @@ import { client, baseMainnet } from "../lib/chains";
 // Replace with your NFT collection address
 const NFT_COLLECTION_ADDRESS = "0xYourNftContractAddress";
 
-export function Profile() {
-  const account = useActiveAccount();
+// Inner component – wallet is guaranteed to exist
+function ProfileContent({ address }: { address: string }) {
   const [tab, setTab] = useState<"nfts" | "activity">("nfts");
 
   const nftCollection = getContract({
@@ -18,24 +18,14 @@ export function Profile() {
     address: NFT_COLLECTION_ADDRESS,
   });
 
+  // No conditional – always called because wallet exists
   const { data: ownedNfts, isLoading: loadingOwnedNfts } = useReadContract(
-    account
-      ? getOwnedNFTs({
-          contract: nftCollection,
-          owner: account.address,
-        })
-      : null,
+    getOwnedNFTs,
+    {
+      contract: nftCollection,
+      owner: address,
+    },
   );
-
-  if (!account) {
-    return (
-      <section className="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
-        <p className="text-sm text-zinc-400">
-          🔗 Connect your wallet to view your profile.
-        </p>
-      </section>
-    );
-  }
 
   const nfts = (ownedNfts as NFT[]) || [];
 
@@ -44,14 +34,14 @@ export function Profile() {
       {/* Profile Header */}
       <div className="flex items-center gap-4">
         <div className="h-16 w-16 rounded-full bg-gradient-to-r from-sky-500 to-purple-500 flex items-center justify-center text-2xl font-bold text-white">
-          {account.address.slice(2, 4).toUpperCase()}
+          {address.slice(2, 4).toUpperCase()}
         </div>
         <div>
           <h2 className="text-xl font-semibold text-white">
             🏦 My Profile
           </h2>
           <p className="text-sm text-zinc-400">
-            {account.address.slice(0, 6)}…{account.address.slice(-4)}
+            {address.slice(0, 6)}…{address.slice(-4)}
           </p>
         </div>
       </div>
@@ -127,6 +117,23 @@ export function Profile() {
       )}
     </section>
   );
+}
+
+// Outer component – checks wallet connection
+export function Profile() {
+  const account = useActiveAccount();
+
+  if (!account) {
+    return (
+      <section className="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
+        <p className="text-sm text-zinc-400">
+          🔗 Connect your wallet to view your profile.
+        </p>
+      </section>
+    );
+  }
+
+  return <ProfileContent address={account.address} />;
 }
 
 export default Profile;
