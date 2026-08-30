@@ -1,11 +1,12 @@
 // Mariano Montini ('bosque', 'bosquestudio')
 import { Profile } from "../components/Profile";
 
-export function ProfilePage() {
-  return (
-    <div className="mx-auto flex max-w-2xl flex-col gap-8 px-6 py-12">
-      <h1 className="text-3xl font-bold">👤 My 3 Word Pins</h1>
-      <Profile />
-    </div>
-  );
+export function Profile() {
+  const { data, loading, error } = useProfileData();
+  
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!data) return <div>Please connect your wallet</div>;
+  
+  return <div>{/* Render profile */}</div>;
 }
