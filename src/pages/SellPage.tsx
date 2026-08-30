@@ -39,7 +39,7 @@ export function SellPage() {
       <header>
         <h1 className="text-3xl font-bold">💰 Sell Your 3 Word Pins</h1>
         <p className="text-sm text-zinc-400 mt-2">
-          Select a pin to list it for sale or rent.
+          Select a 3 Word Pin to list it for sale or rent.
         </p>
       </header>
 
