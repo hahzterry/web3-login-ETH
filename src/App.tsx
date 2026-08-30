@@ -12,7 +12,7 @@ export default function App() {
       <div className="mx-auto flex max-w-xl flex-col gap-8 px-6 py-12">
         <header className="space-y-3">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-400">
-            3 Word Pin Wallet
+            🏦 3 Word Pin Wallet
           </p>
           <h1 className="text-3xl font-semibold tracking-tight">
             Your friendly wallet for the 3 Word Pin world
@@ -30,6 +30,40 @@ export default function App() {
         <IdentityCard />
         <BalancePanel />
         <SignInPanel />
+
+        {/* Real-World Uses Section */}
+        <section className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 space-y-4">
+          <h2 className="text-xl font-semibold text-sky-400">
+            🌍 Use it in real life
+          </h2>
+          <div className="space-y-3 text-sm text-zinc-300">
+            <p>
+              <strong>🏠 Rent out your 3 Word Pin space.</strong>{" "}
+              If you own a 3 Word Pin address, you can rent the physical
+              16×16 ft spot tied to it. The wallet makes it easy to receive
+              rental payments and keep track of who’s paying.
+            </p>
+            <p>
+              <strong>🛒 Pay for local goods and services.</strong>{" "}
+              Use your $LUV points at participating shops or service
+              providers near your pin. No banks or middlemen – just direct
+              value between people.
+            </p>
+            <p>
+              <strong>💳 Build your local reputation.</strong>{" "}
+              Your wallet shows your activity and reliability without
+              needing a traditional credit score. Great for small business
+              owners and freelancers.
+            </p>
+            <p>
+              <strong>📈 Solve real economic pain points.</strong>{" "}
+              Skip slow bank transfers, high fees, and complicated
+              paperwork. The 3 Word Pin Wallet lets you move value quickly
+              and simply, especially for short-term rentals or peer-to-peer
+              payments.
+            </p>
+          </div>
+        </section>
 
         {/* $LUV Reward Section */}
         <section className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 space-y-4">
