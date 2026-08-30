@@ -2,23 +2,178 @@
 
 :root {
   color-scheme: dark;
-  font-family: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: #000000; /* solid black – no gradient to fail */
+  background: #08090d; /* matches map container background */
+  color: #ffffff;
 }
 
-/* subtle scrollbar (just for fun) */
+/* subtle scrollbar matching the map accent colors */
 ::-webkit-scrollbar {
   width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #111;
+  background: #07080d; /* deep dark matching card background */
 }
 ::-webkit-scrollbar-thumb {
-  background: #0052FF;
+  background: linear-gradient(
+    180deg,
+    #ff0050,
+    #ff2d9b,
+    #00f2ea
+  ); /* gradient from map accents */
   border-radius: 10px;
+}
+
+/* Selection styling – subtle pink/cyan glow */
+::selection {
+  background: rgba(255, 0, 80, 0.35);
+  color: #ffffff;
+}
+
+/* Focus ring – cyan glow matching map */
+:focus-visible {
+  outline: 2px solid rgba(0, 242, 234, 0.6);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for hover states */
+a,
+button {
+  transition: all 0.18s ease;
+}
+
+/* Card styling that matches the map popup aesthetic */
+.glass-card {
+  background: radial-gradient(
+      circle at 15% 0%,
+      rgba(255, 0, 80, 0.18),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 100% 15%,
+      rgba(0, 242, 234, 0.15),
+      transparent 34%
+    ),
+    linear-gradient(145deg, rgba(16, 16, 25, 0.98), rgba(7, 8, 15, 0.97));
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.58),
+    0 0 0 1px rgba(255, 0, 80, 0.05),
+    0 0 30px rgba(0, 242, 234, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  color: #ffffff;
+}
+
+/* Gradient text helper matching address display */
+.gradient-text {
+  background: linear-gradient(90deg, #ff4f9a, #ff4fd8, #7df9ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Accent line helper matching card top border */
+.accent-line {
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff0050, #ff2d9b, #00f2ea);
+  box-shadow:
+    0 0 10px rgba(255, 0, 80, 0.45),
+    0 0 12px rgba(0, 242, 234, 0.3);
+}
+
+/* Featured/sponsored badge */
+.featured-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffd700, #ffb300);
+  color: #090909;
+  font-size: 7px;
+  font-weight: 950;
+  letter-spacing: 0.5px;
+}
+
+/* Button styles matching map popup */
+.pin-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 8px;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0.03)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d9faff;
+  font-size: 10px;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.pin-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.11);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Promo button gradient (Story) */
+.promo-pink {
+  background: linear-gradient(135deg, #ff0050, #ff2d9b);
+}
+
+/* Promo button gradient (Feed) */
+.promo-cyan {
+  background: linear-gradient(135deg, #00dfe8, #00f2ea);
+}
+
+/* Legendary CTA gradient */
+.legendary-gradient {
+  background: linear-gradient(
+    100deg,
+    #ff0050 0%,
+    #ff38a4 42%,
+    #c64dff 72%,
+    #00dfe8 100%
+  );
+}
+
+/* Status pill */
+.status-pill {
+  background: rgba(7, 8, 13, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+}
+
+/* Location button */
+.location-button {
+  background: rgba(8, 9, 15, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 242, 234, 0.3);
+  color: #8efdf9;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.location-button:hover {
+  border-color: rgba(0, 242, 234, 0.6);
+  transform: scale(1.1);
 }

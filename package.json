@@ -14,6 +14,7 @@
     "jose": "^5.9.6",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.3",
     "thirdweb": "^5.96.0",
     "viem": "^2.21.0",
     "zod": "^4.4.3"
