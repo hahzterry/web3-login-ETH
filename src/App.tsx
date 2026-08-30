@@ -3,8 +3,8 @@ import { ConnectWallet } from "./components/ConnectWallet";
 import { NetworkGuard } from "./components/NetworkGuard";
 import { SignInPanel } from "./components/SignInPanel";
 import { IdentityCard } from "./components/IdentityCard";
+import { Profile } from "./components/Profile";
 import { BalancePanel } from "./components/BalancePanel";
-import { NftGallery } from "./components/NftGallery";
 
 // App shell – simple landing page for 3 Word Pin Wallet
 export default function App() {
@@ -29,9 +29,7 @@ export default function App() {
         <NetworkGuard />
         <IdentityCard />
         <BalancePanel />
-
-        {/* NFT Verification & Gallery */}
-        <NftGallery />
+        <Profile />
 
         <SignInPanel />
 
