@@ -6,7 +6,7 @@ import { getOwnedNFTs } from "thirdweb/extensions/erc721";
 import { client, baseMainnet } from "../lib/chains";
 
 // Replace with your NFT collection address
-const NFT_COLLECTION_ADDRESS = "0xYourNftContractAddress";
+const NFT_COLLECTION_ADDRESS = "0x36b576a0f90d1Ed7c46E124BFe4d2Dc1ee0242cA";
 
 // Inner component – wallet is guaranteed to exist
 function ProfileContent({ address }: { address: string }) {
