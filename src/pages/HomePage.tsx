@@ -35,6 +35,14 @@ export function HomePage() {
             rel="noopener noreferrer"
             className="px-6 py-3 bg-gradient-to-r from-pink-500 to-fuchsia-500 rounded-full font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-pink-500/25"
           >
+            👀 Find Your 3 Word Pin
+          </a>
+          <a
+            href="https://social.3wordpin.com/product/3-word-pin-address/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-purple-500/25"
+           >
             📍 Claim Your 3 Word Pin
           </a>
         </div>
